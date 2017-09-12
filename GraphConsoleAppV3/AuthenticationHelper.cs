@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Microsoft.Azure.ActiveDirectory.GraphClient;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
@@ -53,7 +53,7 @@ namespace GraphConsoleAppV3
                 else
                 {
                     ClientCredential clientCred = new ClientCredential(
-                        GlobalConstants.ClientId,
+                        AppModeConstants.ClientId,
                         AppModeConstants.ClientSecret);
                     AuthenticationResult authenticationResult =
                         await authenticationContext.AcquireTokenAsync(GlobalConstants.ResourceUrl, clientCred);
@@ -96,7 +96,7 @@ namespace GraphConsoleAppV3
                 var redirectUri = new Uri("https://localhost");
                 AuthenticationContext authenticationContext = new AuthenticationContext(UserModeConstants.AuthString, false);
                 AuthenticationResult userAuthnResult = await authenticationContext.AcquireTokenAsync(GlobalConstants.ResourceUrl,
-                    GlobalConstants.ClientId, redirectUri, new PlatformParameters(PromptBehavior.RefreshSession));
+                    UserModeConstants.ClientId, redirectUri, new PlatformParameters(PromptBehavior.RefreshSession));
                 TokenForUser = userAuthnResult.AccessToken;
                 Console.WriteLine("\n Welcome " + userAuthnResult.UserInfo.GivenName + " " +
                                   userAuthnResult.UserInfo.FamilyName);
